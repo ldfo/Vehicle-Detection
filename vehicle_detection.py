@@ -1,14 +1,14 @@
 import pickle
-from detector import Vehicle_pipeline
+from vehicle_pipeline import Vehicle_pipeline
 import matplotlib.pyplot as plt
 from moviepy.editor import VideoFileClip
 from utils import read_image, draw_boxes, rgb, write_image, convert_video_frame, make_heatmap
 
 if __name__ == '__main__':
-    input_file = 'project_video.mp4'
-    output_file = 'out.mp4'
-    # input_file = 'test_images/test6.jpg'
-    # output_file = 'test_images_processed/test6.jpg'
+    # input_file = 'project_video.mp4'
+    # output_file = 'out.mp4'
+    input_file = 'test_images/test4.jpg'
+    output_file = 'test_images_processed/test4.jpg'
 
     heat_threshold = 2.25
     # load model
@@ -28,14 +28,14 @@ if __name__ == '__main__':
     if file_extension in ['jpg', 'png']:
         # process image
         # Instantiate detector
-        detector = Vehicle_pipeline(classifier, feature_parameters, window_shape, scaler, heat_threshold)
+        vehicle_detector = Vehicle_pipeline(classifier, feature_parameters, window_shape, scaler, heat_threshold)
 
         print('Loading ' + input_file + ' as a ' + feature_parameters['cspace'] + ' image')
         img = read_image(input_file, feature_parameters['cspace'])
         output_to_file = output_file and len(output_file)
 
         print('Detecting vehicles')
-        boxes = detector(img, show_plots=(not output_to_file))
+        boxes = vehicle_detector(img, show_plots=False)
         print(boxes)
         output = draw_boxes(rgb(img, feature_parameters['cspace']), boxes)
 
@@ -49,10 +49,10 @@ if __name__ == '__main__':
             plt.show()
     elif file_extension in ['mp4']:
         # process video
-            detector = Vehicle_pipeline(classifier, feature_parameters, window_shape, scaler, heat_threshold, alpha=0.125)
+            vehicle_detector = Vehicle_pipeline(classifier, feature_parameters, window_shape, scaler, heat_threshold, alpha=0.125)
 
             def frame_handler(frame):
-                boxes = detector(convert_video_frame(frame, feature_parameters['cspace']))
+                boxes = vehicle_detector(convert_video_frame(frame, feature_parameters['cspace']))
                 output = draw_boxes(frame, boxes)
                 return output
 

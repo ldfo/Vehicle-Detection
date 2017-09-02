@@ -23,8 +23,8 @@ args = parser.parse_args()
 feature_parameters = {
     'cspace': 'YCrCb',
     'spatial_size': (32, 32),
-    'hist_bins': 32,
-    'hog_orient': 9,
+    'hist_bins': 30,
+    'hog_orient': 10,
     'hog_pix_per_cell': 8,
     'hog_cell_per_block': 2,
     'hog_channel': 'ALL'

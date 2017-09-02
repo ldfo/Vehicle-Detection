@@ -47,6 +47,7 @@ class Vehicle_pipeline(object):
             a2.imshow(binary, cmap='gray')
             a3.set_title('Label Image')
             a3.imshow(labels[0], cmap='gray')
+            plt.show()
         return boxes
 
     def get_hits(self, img, print_debug=False):
