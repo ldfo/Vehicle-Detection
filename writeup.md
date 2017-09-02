@@ -25,9 +25,9 @@ The goals of this project are the following:
 ---
 
 
-###Histogram of Oriented Gradients (HOG)
+### Histogram of Oriented Gradients (HOG)
 
-####1. Feature Extraction
+#### 1. Feature Extraction
 The code is divided into two main files:
 1. `vehicle_detection.py` where I run the pipeline for detecting vehicles on a video or an image.
 2. `train_classifier.py` where I read the images, extract the features and train a  LinearSVC.
@@ -53,11 +53,11 @@ I then explored different `skimage.hog()` parameters (`orientations`, `pixels_pe
 | Spatial size        | 32 x 32 |
 
 
-####2. Classifier Training
+#### 2. Classifier Training
 
 I trained a linear Support Vector Machine. I used LinearSVC from sklearn with default settings of square-hinged loss function and l2 normalization (`train_classifier.py`). The trained model had an accuracy of 98.4%. I exported the trained model, scaler and parameters to a pickle for easy loading when starting the vehicle detection pipeline. That way I don't need to train the model every time.
 
-###Sliding Window Search
+### Sliding Window Search
 
 On `vehicle_pipeline.py` I defined a class called Vehicle_pipeline, it is a callable
 class that takes an image and returns bounding boxes of detected vehicles.
@@ -93,7 +93,7 @@ are filtered together using an exponential filter. This filters out jitter and i
 
 ---
 
-###Discussion
+### Discussion
 
 One big drawback of my pipeline is that it is slow. It can only process one frame every 1.5 seconds or so. That is unacceptable for real time detection. I am currently running the program on CPU so maybe running it on GPU or reimplementing some functions can help. Another thing that could help is reducing the window size.
 
